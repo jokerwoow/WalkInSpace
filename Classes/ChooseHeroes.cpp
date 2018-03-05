@@ -73,7 +73,7 @@ bool ChooseHeroes::init()
 	//	darkmag1->setScale(0.3);
 	//	darkmag1->setOpacityModifyRGB(true);
 	//	this->addChild(darkmag1,2);
-	auto mag1Sprite = Sprite::create("hero/1.png");
+	auto mag1Sprite = Sprite::create("hero/mag1.png");
 		 mag1Sprite->setPosition(Point(visibleSize.width / SECOND_COLUMN + origin.x, visibleSize.height / FIRST_ROW));
 	this->addChild(mag1Sprite, 1);
 
@@ -82,7 +82,7 @@ bool ChooseHeroes::init()
 		 mag2->setPosition(Point(visibleSize.width / THIRD_COLUMN + origin.x, visibleSize.height / FIRST_ROW));
 		 mag2->setScale(0.3);
 
-	auto mag2Sprite = Sprite::create("hero/2.png");
+	auto mag2Sprite = Sprite::create("hero/mag2.png");
 		 mag2Sprite->setPosition(Point(visibleSize.width / THIRD_COLUMN + origin.x, visibleSize.height / FIRST_ROW+origin.y));
 	this->addChild(mag2Sprite, 1);
 	auto mag2Price = Sprite::create("Coin.png");
@@ -106,7 +106,7 @@ bool ChooseHeroes::init()
 	mag3 = MenuItemImage::create("MissionsBox.png", "MissionsBox.png", " ", CC_CALLBACK_0(ChooseHeroes::Name, this, "mag3",50,3));
 		 mag3->setPosition(Point(visibleSize.width / FIRST_COLUMN + origin.x, visibleSize.height / SECOND_ROW+origin.y));
 		 mag3->setScale(0.3);
-	auto mag3Sprite = Sprite::create("hero/3.png");
+	auto mag3Sprite = Sprite::create("hero/mag3.png");
 		 mag3Sprite->setPosition(Point(visibleSize.width / FIRST_COLUMN + origin.x, visibleSize.height / SECOND_ROW));
 
 	auto mag3Price = Sprite::create("Coin.png");

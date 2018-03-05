@@ -27,7 +27,8 @@ private:
 	cocos2d::Menu *menu;
 	cocos2d::MenuItemImage *musicion;
 	void Music();
-	bool MusicBool = true;
+	bool MusicBool;
+	void mamba();
 };
 
 #endif // __GAME_SCENE_H__

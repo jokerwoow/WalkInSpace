@@ -53,11 +53,13 @@ bool PauseScene::init()
     BackToMenu->setScale(0.3);
 
 	//music on-off
+	MusicBool = cocos2d::UserDefault::getInstance()->getBoolForKey("music", true);
 	musicion = MenuItemImage::create();
 	//musicion->initWithNormalImage("MusicOn.png");
-	musicion->setNormalImage(Sprite::create("MusicOn.png"));
+	
+    musicion->setScale(0.1);
+
 	musicion->setCallback(CC_CALLBACK_0(PauseScene::Music, this));
-	musicion->setScale(0.03);
 	musicion->setPosition(Point(0+origin.x, visibleSize.height + origin.y));
 	musicion->setAnchorPoint(Vec2(0, 1));
 
@@ -104,7 +106,7 @@ bool PauseScene::init()
 
 	this->addChild(menu);
 	
-
+	mamba();
 	return true;
 }
 
@@ -127,14 +129,27 @@ void PauseScene::No(cocos2d::Ref *sender) {
 	menu->setEnabled(true);
 }
 void PauseScene::Music() {
-	MusicBool=!MusicBool;
-	if (MusicBool==true) {	
+	MusicBool = !MusicBool;
+
+	if (MusicBool ==true) {
+		cocos2d::UserDefault::getInstance()->setBoolForKey("music", true);
 		CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(1);
-		musicion->setNormalImage(Sprite::create("MusicOn.png"));
+		musicion->setNormalImage(Sprite::create("but/o1.png"));
 	}
 	else {
+		cocos2d::UserDefault::getInstance()->setBoolForKey("music", false);
 		CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(0);
-		musicion->setNormalImage(Sprite::create("MusicOff.png"));
+		musicion->setNormalImage(Sprite::create("but/f1.png"));
 	}
 }
 
+void PauseScene::mamba() {
+	if (MusicBool == true) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(1);
+		musicion->setNormalImage(Sprite::create("but/o1.png"));
+	}
+	else {
+		musicion->setNormalImage(Sprite::create("but/f1.png"));
+		CocosDenshion::SimpleAudioEngine::getInstance()->setEffectsVolume(0);
+	}
+}

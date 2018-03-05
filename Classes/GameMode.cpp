@@ -40,16 +40,23 @@ bool GameMode::init()
 
 	this->addChild(backgroundSprite);
 
-	auto LvlDifficult = MenuItemFont::create("Classic", CC_CALLBACK_1(GameMode::GoToLvlDifficult, this));
-		 LvlDifficult->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
+	auto LvlDifficult = MenuItemImage::create("but/c1.png", "but/c2.png",CC_CALLBACK_1(GameMode::GoToLvlDifficult, this));
+		 LvlDifficult->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y+200));
+        LvlDifficult->setScale(0.4);
 
-	auto Missions = MenuItemFont::create("Missions", CC_CALLBACK_1(GameMode::GoToMissions, this));
+	auto Missions = MenuItemImage::create("but/m1.png","but/m2.png", CC_CALLBACK_1(GameMode::GoToMissions, this));
 		 Missions->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2.2 + origin.y));
-	auto back = MenuItemFont::create("Back", CC_CALLBACK_1(GameMode::backToMainMenu, this));
-		 back->setPosition(Point(0, 0));
+    Missions->setScale(0.6);
+
+	auto back = MenuItemImage::create("but/b1.png", "but/b2.png",CC_CALLBACK_1(GameMode::backToMainMenu, this));
+		 back->setPosition(Point(0+origin.x, 0));
 		 back->setAnchorPoint(Vec2(0, 0));
-	auto Heroes = MenuItemFont::create("Heroes", CC_CALLBACK_1(GameMode::GoToHeroChoose, this));
-		 Heroes->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2.4 + origin.y));
+    back->setScale(0.1);
+    
+	auto Heroes = MenuItemImage::create("but/h1.png", "but/h2.png", CC_CALLBACK_1(GameMode::GoToHeroChoose, this));
+		 Heroes->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2.4 + origin.y-200));
+    Heroes->setScale(0.4);
+
 	auto menu = Menu::create(LvlDifficult, Missions, Heroes,back,NULL);
 		 menu->setPosition(Vec2::ZERO);
 		 this->addChild(menu);

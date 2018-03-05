@@ -13,7 +13,7 @@ Scene* GameScene::createScene(unsigned int lvl)
 	//scores = lvl;
     // 'scene' is an autorelease object
     auto scene = Scene::createWithPhysics( );
-    scene->getPhysicsWorld( )->setDebugDrawMask( PhysicsWorld::DEBUGDRAW_ALL );
+    //scene->getPhysicsWorld( )->setDebugDrawMask( PhysicsWorld::DEBUGDRAW_ALL );
     scene->getPhysicsWorld( )->setGravity( Vec2( 0, 0 ) );
     
     // 'layer' is an autorelease object
@@ -106,14 +106,17 @@ bool GameScene::init()
 	if (newLvl==0) {
 		
 		this->schedule(schedule_selector(GameScene::SpawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);
+		this->schedule(schedule_selector(GameScene::SpawnCoins), (PIPE_SPAWN_FREQUENCY * 2.5) * visibleSize.width);
 	}
 	else if (newLvl==1) {
 		hero->astroBoy->setScale(heroScale+0.2);
 		this->schedule(schedule_selector(GameScene::SpawnPipe), (PIPE_SPAWN_FREQUENCY/1.5) * visibleSize.width);
+		this->schedule(schedule_selector(GameScene::SpawnCoins), (PIPE_SPAWN_FREQUENCY * 2.5) * visibleSize.width);
 	}		
 	else if (newLvl==2) {
 		hero->astroBoy->setScale(heroScale+0.2);
 		this->schedule(schedule_selector(GameScene::SpawnPipe), (PIPE_SPAWN_FREQUENCY/1.5) * visibleSize.width);
+		this->schedule(schedule_selector(GameScene::SpawnCoins), (PIPE_SPAWN_FREQUENCY * 2.5) * visibleSize.width);
 	}
 											//Missions
 	//lvl 1
@@ -149,6 +152,13 @@ bool GameScene::init()
 		CoinsNullLabel->setVisible(true);
 		this->schedule(schedule_selector(GameScene::FreeObstacles), (PIPE_SPAWN_FREQUENCY/2) * visibleSize.width);
 		this->schedule(schedule_selector(GameScene::SpawnCoins), (PIPE_SPAWN_FREQUENCY *2) * visibleSize.width);
+	}
+	//lvl 8
+	else if (newLvl == 10) {
+		pipe.sec = 40;
+		scoreLabel->setVisible(false);
+		this->schedule(schedule_selector(GameScene::SpawnPipe), PIPE_SPAWN_FREQUENCY * visibleSize.width);
+		this->schedule(schedule_selector(GameScene::Timer), 1);
 	}
 
 	//***********************************
@@ -311,8 +321,8 @@ bool GameScene::onContactBegin( cocos2d::PhysicsContact &contact )
 		//	__String *tempScore = __String::createWithFormat("%i", score);
 		//	scoreLabel->setString(tempScore->getCString());
 		}
-		//lvl 4
-		if (newLvl == 6) {
+		//lvl 4 && lvl 8
+		if (newLvl == 6 || newLvl == 10) {
 			score = 0;
 		}
 		//lvl 6
@@ -386,24 +396,32 @@ void GameScene::MissionsEnded(unsigned int score, unsigned int lvl) {
 			
 			cocos2d::UserDefault::getInstance()->setBoolForKey("lvl1", true);
 			EndMission();
+			coins += 1;
+			cocos2d::UserDefault::getInstance()->setIntegerForKey("Coins", coins);
 		}
 	}
 	if (lvl == 4) {
 		if (pipe.bonus == 10) {
 			cocos2d::UserDefault::getInstance()->setBoolForKey("lvl2", true);
 			EndMission();
+			coins += 2;
+			cocos2d::UserDefault::getInstance()->setIntegerForKey("Coins", coins);
 		}
 	}
 	if (lvl == 5) {
 		if (MinusPoint == 10) {
 			cocos2d::UserDefault::getInstance()->setBoolForKey("lvl3", true);
 			EndMission();
+			coins += 3;
+				cocos2d::UserDefault::getInstance()->setIntegerForKey("Coins", coins);
 		}
 	}
 	if (lvl == 6) {
 		if (pipe.sec == -1) {
 			cocos2d::UserDefault::getInstance()->setBoolForKey("lvl4", true);
 			EndMission();
+			coins += 4;
+				cocos2d::UserDefault::getInstance()->setIntegerForKey("Coins", coins);
 
 		}
 	}
@@ -412,12 +430,16 @@ void GameScene::MissionsEnded(unsigned int score, unsigned int lvl) {
 			timerLabel->setVisible(false);
 			cocos2d::UserDefault::getInstance()->setBoolForKey("lvl5", true);
 			EndMission();
+			coins += 5;
+				cocos2d::UserDefault::getInstance()->setIntegerForKey("Coins", coins);
 		}
 	}
 	if (lvl == 8) {
 		if (score >= 60) {
 			cocos2d::UserDefault::getInstance()->setBoolForKey("lvl6", true);
 			EndMission();
+			coins += 6;
+				cocos2d::UserDefault::getInstance()->setIntegerForKey("Coins", coins);
 		}
 	}
 	if (lvl == 9) {
@@ -425,7 +447,19 @@ void GameScene::MissionsEnded(unsigned int score, unsigned int lvl) {
 
 			cocos2d::UserDefault::getInstance()->setBoolForKey("lvl7", true);
 			EndMission();
+			coins += 7;
+				cocos2d::UserDefault::getInstance()->setIntegerForKey("Coins", coins);
 		}
+
+	}
+	if (lvl == 10) {
+		if (pipe.sec == -1) {
+			cocos2d::UserDefault::getInstance()->setBoolForKey("lvl8", true);
+			EndMission();
+			coins += 8;
+				cocos2d::UserDefault::getInstance()->setIntegerForKey("Coins", coins);
+		}
+	
 	}
 	
 }

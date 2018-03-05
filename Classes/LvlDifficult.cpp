@@ -49,10 +49,11 @@ bool LvlDifficult::init()
 	auto insane = MenuItemImage::create("Buttons/I1.png","Buttons/I2.png", CC_CALLBACK_1(LvlDifficult::Insane, this));
 		 insane->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2.4 + origin.y - 200));
 		 insane->setScale(0.3);
-
-	auto back = MenuItemFont::create("Back", CC_CALLBACK_1(LvlDifficult::backToGameMode, this));
-		 back->setPosition(Point(0+origin.x, 0+origin.y));
-		 back->setAnchorPoint(Vec2(0, 0));
+    
+    auto back = MenuItemImage::create("but/b1.png", "but/b2.png", CC_CALLBACK_1(LvlDifficult::backToGameMode, this));
+    back->setPosition(Point(0+origin.x, 0));
+    back->setAnchorPoint(Vec2(0, 0));
+    back->setScale(0.1);
 	
 	auto menu = Menu::create(easy, hard, insane,back,  NULL);
 		 menu->setPosition(Point::ZERO);

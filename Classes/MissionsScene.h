@@ -22,6 +22,7 @@ private:
 	
 	void backToGameMode(Ref *sender);
 	void about(const char *xz,int lvl);
+	void falseMision();
 	cocos2d::Menu *LvlMenu;
 
 	cocos2d::MenuItemImage *lvl1;
@@ -41,11 +42,15 @@ private:
 
 
 	cocos2d::MenuItemImage *lvl7;
+
+	cocos2d::MenuItemImage *lvl8;
+
 	void start(int lvl);
 	void MissionsSkin();
 	cocos2d::Sprite *sprite;
 	bool backToMainMenu(cocos2d::Touch *touch, cocos2d::Event *event);
 	bool visible = false;
+
 };
 
 #endif // __GAME_SCENE_H__

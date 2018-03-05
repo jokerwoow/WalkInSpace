@@ -149,7 +149,7 @@ void Pipe::SpawnPipe(cocos2d::Layer *layer,unsigned int yep)
 
 
 	//insane lvl
-	if (yep == 2|| yep ==8) {
+	if (yep == 2 || yep ==8 || yep==10) {
 		Pipe->runAction(PipeSpawn);
 		topBall->runAction(topPipeSpawn);
 		botBall->runAction(bottomPipeSpawn);

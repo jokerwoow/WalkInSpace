@@ -38,11 +38,13 @@ bool MissionsScene::init()
 	backgroundSprite->setPosition(Point(visibleSize.width / 2 + origin.x, visibleSize.height / 2 + origin.y));
 
 	this->addChild(backgroundSprite);
-
-	
-	auto back = MenuItemFont::create("Back", CC_CALLBACK_1(MissionsScene::backToGameMode, this));
-		 back->setPosition(Point(0+origin.x, 0+origin.y));
-		 back->setAnchorPoint(Vec2(0, 0));
+    
+    auto back = MenuItemImage::create("but/b1.png", "but/b2.png", CC_CALLBACK_1(MissionsScene::backToGameMode, this));
+    back->setPosition(Point(0+origin.x, 0));
+    back->setAnchorPoint(Vec2(0, 0));
+    back->setScale(0.1);
+    
+    
 	auto menu = Menu::create(back, NULL);
 		 menu->setPosition(Vec2::ZERO);
 	this->addChild(menu);
@@ -58,6 +60,7 @@ bool MissionsScene::init()
 		 lvl1->setCallback(CC_CALLBACK_0(MissionsScene::about, this, "Earn 20 points", 3));
 		 lvl1->setPosition(Point(visibleSize.width / FIRST_COLUMN + origin.x, visibleSize.height / FIRST_ROW));
 		 lvl1->setScale(0.3);
+		 lvl1->setVisible(true);
 
 	auto Label1 = Label::createWithTTF("1", "fonts/Marker Felt.ttf", visibleSize.height*SCORE_FONT_SIZE);
 		 Label1->setPosition(Point(visibleSize.width / FIRST_COLUMN + origin.x, visibleSize.height / FIRST_ROW));
@@ -73,6 +76,7 @@ bool MissionsScene::init()
 		 lvl2->setCallback(CC_CALLBACK_0(MissionsScene::about, this,"Get bonus 10x", 4));
 		 lvl2->setPosition(Point(visibleSize.width / SECOND_COLUMN + origin.x, visibleSize.height / FIRST_ROW));
 		 lvl2->setScale(0.3);
+		 lvl2->setVisible(false);
 
 	auto Label2 = Label::createWithTTF("2", "fonts/Marker Felt.ttf", visibleSize.height*SCORE_FONT_SIZE);
 		 Label2->setPosition(Point(visibleSize.width / SECOND_COLUMN + origin.x, visibleSize.height / FIRST_ROW));
@@ -88,6 +92,7 @@ bool MissionsScene::init()
 		 lvl3->setCallback(CC_CALLBACK_0(MissionsScene::about, this,"Lost 10 points", 5));
 		 lvl3->setPosition(Point(visibleSize.width / THIRD_COLUMN + origin.x, visibleSize.height / FIRST_ROW));
 		 lvl3->setScale(0.3);
+		 lvl3->setVisible(false);
 
 		 auto Label3 = Label::createWithTTF("3", "fonts/Marker Felt.ttf", visibleSize.height*SCORE_FONT_SIZE);
 		 Label3->setPosition(Point(visibleSize.width / THIRD_COLUMN + origin.x, visibleSize.height / FIRST_ROW));
@@ -104,6 +109,7 @@ bool MissionsScene::init()
 		 lvl4->setCallback(CC_CALLBACK_0(MissionsScene::about, this,"Don`t die 30sec", 6));
 		 lvl4->setPosition(Point(visibleSize.width / FIRST_COLUMN + origin.x, visibleSize.height / SECOND_ROW + origin.y));
 		 lvl4->setScale(0.3);
+		 lvl4->setVisible(false);
 
 		 auto Label4 = Label::createWithTTF("4", "fonts/Marker Felt.ttf", visibleSize.height*SCORE_FONT_SIZE);
 		 Label4->setPosition(Point(visibleSize.width / FIRST_COLUMN + origin.x, visibleSize.height / SECOND_ROW + origin.y));
@@ -120,6 +126,7 @@ bool MissionsScene::init()
 		 lvl5->setCallback(CC_CALLBACK_0(MissionsScene::about, this,"Earn 50 points", 7));
 		 lvl5->setPosition(Point(visibleSize.width / SECOND_COLUMN + origin.x, visibleSize.height / SECOND_ROW + origin.y));
 		 lvl5->setScale(0.3);
+		 lvl5->setVisible(false);
 
 		 auto Label5 = Label::createWithTTF("5", "fonts/Marker Felt.ttf", visibleSize.height*SCORE_FONT_SIZE);
 		 Label5->setPosition(Point(visibleSize.width / SECOND_COLUMN + origin.x, visibleSize.height / SECOND_ROW + origin.y));
@@ -136,6 +143,7 @@ bool MissionsScene::init()
 		 lvl6->setCallback(CC_CALLBACK_0(MissionsScene::about, this,"Earn 60 points", 8));
 		 lvl6->setPosition(Point(visibleSize.width / THIRD_COLUMN + origin.x, visibleSize.height / SECOND_ROW + origin.y));
 		 lvl6->setScale(0.3);
+		 lvl6->setVisible(false);
 
 		 auto Label6 = Label::createWithTTF("6", "fonts/Marker Felt.ttf", visibleSize.height*SCORE_FONT_SIZE);
 		 Label6->setPosition(Point(visibleSize.width / THIRD_COLUMN + origin.x, visibleSize.height / SECOND_ROW + origin.y));
@@ -151,6 +159,7 @@ bool MissionsScene::init()
 		 lvl7->setCallback(CC_CALLBACK_0(MissionsScene::about, this,"Earn 10 coins", 9));
 		 lvl7->setPosition(Point(visibleSize.width / FIRST_COLUMN + origin.x, visibleSize.height / 3 + origin.y));
 		 lvl7->setScale(0.3);
+		 lvl7->setVisible(false);
 
 		 auto Label7 = Label::createWithTTF("7", "fonts/Marker Felt.ttf", visibleSize.height*SCORE_FONT_SIZE);
 		 Label7->setPosition(Point(visibleSize.width / FIRST_COLUMN + origin.x, visibleSize.height / 3 + origin.y));
@@ -158,8 +167,24 @@ bool MissionsScene::init()
 		 Label7->setColor(Color3B::BLACK);
 		 this->addChild(Label7, 1);
 	//******************************************************************
+	//lvl 8
+		 lvl8 = MenuItemImage::create();
 
-	LvlMenu = Menu::create(lvl1,lvl2,lvl3,lvl4,lvl5,lvl6,lvl7, NULL);
+		 lvl8->setNormalImage(Sprite::create("MissionsBox.png"));
+
+		 lvl8->setCallback(CC_CALLBACK_0(MissionsScene::about, this, "Don`t die 40sec", 10));
+		 lvl8->setPosition(Point(visibleSize.width / SECOND_COLUMN + origin.x, visibleSize.height / 3 + origin.y));
+		 lvl8->setScale(0.3);
+		 lvl8->setVisible(false);
+
+		 auto Label8 = Label::createWithTTF("8", "fonts/Marker Felt.ttf", visibleSize.height*SCORE_FONT_SIZE);
+		 Label8->setPosition(Point(visibleSize.width / SECOND_COLUMN + origin.x, visibleSize.height / 3 + origin.y));
+		 Label8->setAnchorPoint(Vec2(0.5, 0.5));
+		 Label8->setColor(Color3B::BLACK);
+		 this->addChild(Label8, 1);
+		 //******************************************************************
+		 
+	LvlMenu = Menu::create(lvl1,lvl2,lvl3,lvl4,lvl5,lvl6,lvl7,lvl8, NULL);
 	LvlMenu->setPosition(Vec2::ZERO);
 	this->addChild(LvlMenu);
 	
@@ -220,9 +245,9 @@ bool MissionsScene::backToMainMenu(cocos2d::Touch *touch, cocos2d::Event *event)
 }
 void MissionsScene::MissionsSkin() {
 
-	MenuItemImage *a[] = {lvl1,lvl2,lvl3,lvl4,lvl5,lvl6,lvl7};
-
-	for (int i = 1; i <= (sizeof(a)/sizeof(*a)); i++) {
+	MenuItemImage *a[] = {lvl1,lvl2,lvl3,lvl4,lvl5,lvl6,lvl7,lvl8};
+	int size = (sizeof(a) / sizeof(*a));
+	for (int i = 1; i <=size ; i++) {
 
 		__String *Mission = __String::createWithFormat("%c""%c""%c" "%i", 'l', 'v', 'l', i);
 
@@ -230,6 +255,24 @@ void MissionsScene::MissionsSkin() {
 		
 		if (cocos2d::UserDefault::getInstance()->getBoolForKey(xz) == true) {
 			a[i-1]->setNormalImage(Sprite::create("MissionsBoxOk.png"));
+			if (i != size) {
+				a[i]->setVisible(true);
+			}
+			else {
+				a[i - 1]->setVisible(true);
+			}
 		}
 	}
 }
+/*void MissionsScene::falseMision() {
+	MenuItemImage *a[] = { lvl1,lvl2,lvl3,lvl4,lvl5,lvl6,lvl7 };
+
+	for (int i = 1; i <= (sizeof(a) / sizeof(*a)); i++) {
+		__String *Mission = __String::createWithFormat("%c""%c""%c" "%i", 'l', 'v', 'l', i);
+	
+
+	}
+
+
+
+}*/
